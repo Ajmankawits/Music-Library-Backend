@@ -28,4 +28,9 @@ def songs_detail(request, pk):
     if request.method == 'GET':
         serializer = SongSerializer(music);
         return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = SongSerializer(music, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 # Create your views here.
